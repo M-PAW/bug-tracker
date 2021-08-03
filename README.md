@@ -1,2 +1,2 @@
-# bug_tracker
+# bug-tracker
 an issue / bug tracker
