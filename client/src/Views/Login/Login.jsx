@@ -13,8 +13,21 @@ const Login = () => {
                     type='text' 
                     value={'Null'} 
                     placeholder='Name' 
-                    onChange={() => window.alert('Typity Typity!')}
+                    onChange={() => window.alert('User Typity!')}
                 />
+                <input 
+                    name='password' 
+                    type='password' 
+                    value={'Null'} 
+                    placeholder='Password' 
+                    onChange={() => window.alert('Password Typity!')}
+                />
+                <button
+                    type='submit'
+                    onClick={() => window.alert('Submit-Login Fired!')}
+                >
+                    Login
+                </button>
             </form>
         </div>
     )
