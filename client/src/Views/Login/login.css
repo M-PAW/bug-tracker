@@ -1,0 +1,33 @@
+.loginBG {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: url("../../assets/michael-geiger-JJPqavJBy_k-unsplash.jpg");
+    background-size: cover;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+    width: 30vw;
+    padding: 10px;
+    padding-bottom: 20px;
+    text-align: center;
+    background-color: rgba(240,240,240,0.85);
+    border: 2px 2px 1px 1px dark gray;
+    border-style:outset;
+    box-shadow: 4px 6px 12px darkred;
+}
+
+.loginForm h1 {
+    font-size: 3.2rem;
+}
+
+input {
+    margin: 5px;
+}

@@ -1,1 +1,8 @@
+html {
+    margin: 0;
+    padding: 0;
+    /* margin-left: 20vw; */
+    --prime-color: rgba(155,0,15,.8);
+    color: crimson;
+}
 
