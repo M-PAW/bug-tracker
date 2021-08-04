@@ -1,5 +1,5 @@
 # bug-tracker
-An issue / bug tracker meant to help managers and teams of developers to manage one or more software projects and keep on top of potential issues in a timely manner.
+An issue / bug tracker meant to help project managers and teams of developers to manage one or more software projects and keep on top of potential issues in a timely manner.
 
 ## 1 - Setup
 - Open terminal and navigate to the project folder
