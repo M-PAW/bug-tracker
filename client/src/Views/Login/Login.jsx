@@ -1,6 +1,29 @@
-import React from 'react'
+import React, {useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {signIn} from '../../Controllers/Redux/authSlice';
+
 
 const Login = () => {
+    const dispatch = useDispatch();
+    const [formInput, setFormInput] = useState({
+        name: "",
+        password: "",
+    })
+
+    function changeHandler(event){
+        if (event.target.name === "name"){
+            if (event.target.value !== formInput.name) {
+                setFormInput({...formInput, name: event.target.value})
+            }
+        }
+        if (event.target.name === "password") {
+            if (event.target.value !== formInput.password) {
+                setFormInput({...formInput, password: event.target.value})
+            }
+        }
+        console.log(formInput);
+    }
+
     return (
         <div className="loginBG">
             <form 
@@ -11,20 +34,20 @@ const Login = () => {
                 <input 
                     name='name' 
                     type='text' 
-                    value={'Null'} 
+                    // value={formInput.name} 
                     placeholder='Name' 
-                    onChange={() => window.alert('User Typity!')}
+                    onChange={changeHandler}
                 />
                 <input 
                     name='password' 
                     type='password' 
-                    value={'Null'} 
+                    // value={'Null'} 
                     placeholder='Password' 
-                    onChange={() => window.alert('Password Typity!')}
+                    onChange={changeHandler}
                 />
                 <button
                     type='submit'
-                    onClick={() => window.alert('Submit-Login Fired!')}
+                    onClick={() => window.alert('Submit Fired!')}
                 >
                     Login
                 </button>
