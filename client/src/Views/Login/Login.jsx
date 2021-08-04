@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {signIn} from '../../Controllers/Redux/authSlice';
+import './login.css';
 
 
 const Login = () => {
@@ -21,37 +22,44 @@ const Login = () => {
                 setFormInput({...formInput, password: event.target.value})
             }
         }
-        console.log(formInput);
+        // console.log(formInput);
+    }
+
+    function submitHandler(event) {
+        dispatch(signIn(formInput));
+        event.preventDefault();
     }
 
     return (
         <div className="loginBG">
-            <form 
-                action=""
-                className="login-panel"
-            >
-                <h1>Login</h1>
-                <input 
-                    name='name' 
-                    type='text' 
-                    // value={formInput.name} 
-                    placeholder='Name' 
-                    onChange={changeHandler}
-                />
-                <input 
-                    name='password' 
-                    type='password' 
-                    // value={'Null'} 
-                    placeholder='Password' 
-                    onChange={changeHandler}
-                />
-                <button
-                    type='submit'
-                    onClick={() => window.alert('Submit Fired!')}
+            <div className="loginForm">
+            <h1>Login</h1>
+                <form 
+                    action=""
+                    className="login-panel"
                 >
-                    Login
-                </button>
-            </form>
+                    <input 
+                        name='name' 
+                        type='text' 
+                        value={formInput.name} 
+                        placeholder='Name' 
+                        onChange={changeHandler}
+                    />
+                    <input 
+                        name='password' 
+                        type='password' 
+                        value={formInput.password} 
+                        placeholder='Password' 
+                        onChange={changeHandler}
+                    />
+                    <button
+                        type='submit'
+                        onClick={submitHandler}
+                    >
+                        Login
+                    </button>
+                </form>
+            </div>
         </div>
     )
 }
