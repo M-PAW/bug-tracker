@@ -33,7 +33,7 @@ const Login = () => {
     return (
         <div className="loginBG">
             <div className="loginForm">
-            <h1>Login</h1>
+            <h1>Bug Tracker <span>V1.0</span></h1>
                 <form 
                     action=""
                     className="login-panel"
@@ -52,6 +52,7 @@ const Login = () => {
                         placeholder='Password' 
                         onChange={changeHandler}
                     />
+                    <br/>
                     <button
                         type='submit'
                         onClick={submitHandler}

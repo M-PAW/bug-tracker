@@ -2,8 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    height: 100vh;
+    width: 98vw;
+    height: 98vh;
     background: url("../../assets/michael-geiger-JJPqavJBy_k-unsplash.jpg");
     background-size: cover;
 }
@@ -15,8 +15,7 @@
     align-items: center;
     height: 20vh;
     width: 30vw;
-    padding: 10px;
-    padding-bottom: 20px;
+    padding: 10px 15px 20px 15px;
     text-align: center;
     background-color: rgba(240,240,240,0.85);
     border: 2px 2px 1px 1px dark gray;
@@ -28,6 +27,14 @@
     font-size: 3.2rem;
 }
 
+.loginForm span {
+    font-size: 1.4rem;
+}
+
 input {
     margin: 5px;
+    background-color: black;
+    color: white;
+    margin-bottom: 15px;
 }
+
