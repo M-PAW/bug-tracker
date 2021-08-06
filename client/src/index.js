@@ -5,6 +5,7 @@ import App from './App';
 import {Provider} from 'react-redux';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Reducers
 import authReducer from './Controllers/Redux/authSlice';
