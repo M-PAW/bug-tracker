@@ -14,9 +14,9 @@ import userReducer from './Controllers/Redux/userSlice';
 
 // Redux Confix
 const rootReducer = combineReducers({
-  authReducer,
-  bugReducer,
-  userReducer
+  auth: authReducer,
+  bug: bugReducer,
+  user: userReducer,
 })
 
 const store = configureStore({
