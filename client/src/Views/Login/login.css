@@ -1,3 +1,12 @@
+.background-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(175,175,190,0.5);
+}
+
 .loginBG {
     display: flex;
     justify-content: center;
@@ -9,26 +18,34 @@
 }
 
 .loginForm {
+    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     height: 20vh;
     width: 30vw;
-    padding: 10px 15px 20px 15px;
+    padding: 20px;
     text-align: center;
-    background-color: rgba(240,240,240,0.85);
+    background-color: rgba(240,240,240,0.78);
     border: 2px 2px 1px 1px dark gray;
     border-style:outset;
-    box-shadow: 4px 6px 12px darkred;
+    box-shadow: 6px 8px 12px darkred;
 }
 
 .loginForm h1 {
     font-size: 3.2rem;
+    color: crimson;
+    font-style:oblique;
 }
 
-.loginForm span {
+.loginForm #flag {
+    color: black;
+}
+
+.loginForm #version {
     font-size: 1.4rem;
+    color: darkred;
 }
 
 input {

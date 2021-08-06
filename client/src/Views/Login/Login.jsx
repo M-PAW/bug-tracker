@@ -32,34 +32,36 @@ const Login = () => {
 
     return (
         <div className="loginBG">
-            <div className="loginForm">
-            <h1>Bug Tracker <span>V1.0</span></h1>
-                <form 
-                    action=""
-                    className="login-panel"
-                >
-                    <input 
-                        name='name' 
-                        type='text' 
-                        value={formInput.name} 
-                        placeholder='Name' 
-                        onChange={changeHandler}
-                    />
-                    <input 
-                        name='password' 
-                        type='password' 
-                        value={formInput.password} 
-                        placeholder='Password' 
-                        onChange={changeHandler}
-                    />
-                    <br/>
-                    <button
-                        type='submit'
-                        onClick={submitHandler}
+            <div className="background-modal">
+                <div className="loginForm">
+                    <h1>Black <span id="flag">Flag</span> <span id="version">V1.0</span></h1>
+                    <form 
+                        action=""
+                        className="login-panel"
                     >
-                        Login
-                    </button>
-                </form>
+                        <input 
+                            name='name' 
+                            type='text' 
+                            value={formInput.name} 
+                            placeholder='Name' 
+                            onChange={changeHandler}
+                        />
+                        <input 
+                            name='password' 
+                            type='password' 
+                            value={formInput.password} 
+                            placeholder='Password' 
+                            onChange={changeHandler}
+                        />
+                        <br/>
+                        <button
+                            type='submit'
+                            onClick={submitHandler}
+                        >
+                            Login
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     )
