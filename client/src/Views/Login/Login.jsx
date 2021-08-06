@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {signIn} from '../../Controllers/Redux/authSlice';
+import { Button } from 'react-bootstrap';
 import './login.css';
 
 
@@ -54,12 +55,12 @@ const Login = () => {
                             onChange={changeHandler}
                         />
                         <br/>
-                        <button
-                            type='submit'
+                        <Button
                             onClick={submitHandler}
+                            variant="secondary"
                         >
                             Login
-                        </button>
+                        </Button>
                     </form>
                 </div>
             </div>
