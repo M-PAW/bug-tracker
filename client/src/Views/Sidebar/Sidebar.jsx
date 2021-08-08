@@ -1,16 +1,18 @@
 import React from 'react'
 import {Button} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 import './Sidebar.css';
 
 const Sidebar = () => {
     return (
         <div className="sidebar">
             <div>
-                <h2>Dashboard</h2>
+                <h1>Black Flag</h1>
+                <Link to="/">Dashboard</Link>
                 <hr />
-                <h2>View Bugs</h2>
+                <Link to="viewbugs">View Bugs</Link>
                 <hr />
-                <h2>Create Bug</h2>
+                <h4>Create Bug</h4>
                 <hr />
             </div>
             <Button

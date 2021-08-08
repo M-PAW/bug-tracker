@@ -1,6 +1,7 @@
 import React from 'react'
-
-import ViewBugs from '../Pages/ViewBugs';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import ViewBugs from '../Pages/ViewBugs/ViewBugs';
+import Dashboard from '../Pages/Dashboard/Dashboard'
 import Sidebar from '../Sidebar/Sidebar';
 
 import './authenticated.css';
@@ -8,8 +9,13 @@ import './authenticated.css';
 const Authenticated = () => {
     return (
         <div className="auth-container">
-            <Sidebar />
-            <ViewBugs />
+            <Router>
+                <Sidebar />
+                <Switch>
+                    <Route exact path="/" component={Dashboard} />
+                    <Route path="/viewbugs" component={ViewBugs} />
+                </Switch>
+            </Router>
         </div>
     )
 }

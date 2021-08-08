@@ -13,10 +13,12 @@
 }
 
 .bug-card:hover {
-    position: relative;
+    /* position: relative;
     transition: ease-in-out 500;
     box-shadow: 4px 4px 12px black;
     top: -3px;
-    left: -2px;
+    left: -2px; */
+    transition: ease-in-out 0.45s;
+    transform: scale(1.05);
     cursor: pointer;
 }
