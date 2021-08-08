@@ -1,11 +1,13 @@
 import React from 'react'
-import 
+import './BugCard.css';
 
-const BugCard = ({name, priority, version, clicked}) => {
+const BugCard = (props) => {
 
     const Clicked = () => {
-        clicked(name);
+        props.clicked();
     }
+
+    const {name,priority,version} = props.props;
 
     return (
         <div className="bug-card" onClick={Clicked}>
