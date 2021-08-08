@@ -4,7 +4,7 @@ html {
     /* margin-left: 20vw; */
     --prime-color: rgba(155,0,15,.8);
     color: crimson;
-    --card-color: maroon;
+    --card-color: lightBlue;
 }
 
 .page-container {
@@ -13,4 +13,6 @@ html {
     gap: 20px;
     justify-content: center;
     grid-column: 2;
+    padding:10px;
 }
+

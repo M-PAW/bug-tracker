@@ -1,8 +1,7 @@
 import React from 'react';
 import Login from './Views/Login/Login'
 import {useSelector} from 'react-redux'
-import ViewBugs from './Views/Pages/ViewBugs';
-import Sidebar from './Views/Sidebar/Sidebar';
+import Authenticated from './Views/Authenticated/Authenticated';
 
 function App() {
   const {auth} = useSelector(state => state);
@@ -11,10 +10,7 @@ function App() {
     {
       !auth.LoggedIn 
         ?<Login />
-        :<>
-          <Sidebar />
-          <ViewBugs />
-        </>
+        :<Authenticated />
     }
     </>
   )
