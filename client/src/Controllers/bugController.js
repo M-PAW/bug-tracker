@@ -32,7 +32,29 @@ export function retrieveBugs(){
         version: "V2.1",
         assinged: "MPAW",
         creator: "Tony Stark",
+        priority: 2,
+        time: "23:38",
+    }))
+    data.push(new bugModel({
+        _id: 12348,
+        name: "Can't, just can't",
+        details: "The update profile suck",
+        steps: "On a standard user account attempt to update the profile information, things broke",
+        version: "V2.1",
+        assinged: "MPAW",
+        creator: "Tony Stark",
         priority: 3,
+        time: "23:38",
+    }))
+    data.push(new bugModel({
+        _id: 12349,
+        name: "Can't read good",
+        details: "Nothing is work good",
+        steps: "My standard of acount not work good, I click and not happen working",
+        version: "V2.1",
+        assinged: "MPAW",
+        creator: "Hulk",
+        priority: 2,
         time: "23:38",
     }))
 

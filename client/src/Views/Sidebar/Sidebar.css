@@ -1,0 +1,15 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 200px;
+    height: 100vh;
+    padding: 50px 15px 15px 15px;
+}
+
+.sidebar h2:hover {
+    transition: ease-in-out 500;
+    cursor: pointer;
+    background: maroon;
+    color: white;
+}
