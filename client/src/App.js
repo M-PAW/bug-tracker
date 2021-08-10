@@ -1,5 +1,5 @@
 import React from 'react';
-import Login from './Views/Login/Login'
+import Login from './Views/Pages/Login/Login'
 import {useSelector} from 'react-redux'
 import Authenticated from './Views/Authenticated/Authenticated';
 
