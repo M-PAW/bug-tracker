@@ -14,7 +14,7 @@ const slice = createSlice({
 
         },
         markComplete:(state,action) => {
-
+            console.log('Complete!');
         }
     }
 })

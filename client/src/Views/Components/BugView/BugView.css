@@ -29,3 +29,9 @@
     align-items: center;
     width: 100%;
 }
+
+.close-button button:hover {
+    transition: ease-in-out 0.3s;
+    background-color: black;
+    color: white;
+}
