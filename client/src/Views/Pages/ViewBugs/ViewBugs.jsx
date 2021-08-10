@@ -24,9 +24,14 @@ const ViewBugs = () => {
         })
     }
 
+    function closeBug() {
+        setDisplayBug({...setDisplayBug, name:'',isDisplayed:false})
+    }
+
     return (
         <div className="page-container">
             {
+                
                 bugs.map((bug,key) => {
                     let {name,priority,version} = bug
                     return (
@@ -35,7 +40,8 @@ const ViewBugs = () => {
                 })
             }
             {
-                displayBug.isDisplayed?'yes':'no'
+                displayBug.isDisplayed 
+                && <BugView bug={bugs.filter((bug) => {return bug.name === displayBug.name})} close={closeBug}/>
             }
         </div>
     )
