@@ -1,0 +1,38 @@
+.bug-create {
+    width: 60vw;
+    background-color: var(--prime-color);
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 20px 0 20px 0;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.bug-create form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bug-create form textarea {
+    width: 70%;
+    height: 20vh;
+}
+
+.bug-create form label:nth-of-type(2) {
+    padding-top: 15px;
+}
+
+.bug-create form select {
+    width: 5vw;
+}
+
+.bug-create form select:nth-of-type(2) {
+    width: 15vw;
+}
+
+.bug-create form input,textarea,button, div select {
+    margin: 20px;
+}
