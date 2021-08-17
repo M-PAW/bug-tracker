@@ -5,7 +5,7 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose')
 
-mongoose.connect(process.env.DB_URI,{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true},(err) => {
+mongoose.connect(process.env.DB_URI,{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false},(err) => {
     if (!err) return console.log('DB Connected Successfully');
     console.log(err);
 })
@@ -13,7 +13,8 @@ mongoose.connect(process.env.DB_URI,{ useNewUrlParser: true, useUnifiedTopology:
 const PORT = process.env.PORT || 5500;
 
 const app = express();
-app.use(express.urlencoded({extended:true}))
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 app.use(helmet());
 app.use(cors());
 app.use(cookieParser());

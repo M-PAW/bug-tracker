@@ -9,8 +9,21 @@ const slice = createSlice({
     reducers: {
         signIn:(state,action) => {
             const {name, password} = action.payload;
-            state.LoggedIn = true;
-            state.admin = true;
+            fetch('http://localhost:5500/auth/', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    name: name,
+                    password: password
+                })
+            })
+            .then(() => console.log('fired'))
+            .then(() =>
+            state.LoggedIn = true,
+            state.admin = true
+            )
+            .catch(err => console.log(err))
+
         },
         signOut:(state) => {
             state.LoggedIn = false;
