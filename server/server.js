@@ -20,6 +20,7 @@ app.use(cors());
 app.use(cookieParser());
 
 app.use('/auth', require('./Controller/Routes/auth'))
+app.use('/user', require('./Controller/Routes/user'))
 
 app.get('/', (req,res) => {
     res.status(200).json('Online')

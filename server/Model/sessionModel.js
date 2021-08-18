@@ -1,11 +1,9 @@
 const mongoose = require('mongoose');
 
 const schema = mongoose.Schema({
-    name:String,
-    password:String,
-    id:String
+    String:String
 })
 
-const model = mongoose.model('Login',schema)
+const model = mongoose.model('Session',schema)
 
 module.exports = model;
