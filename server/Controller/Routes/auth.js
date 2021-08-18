@@ -1,20 +1,60 @@
 const route = require('express').Router();
 const loginModel = require('../../Model/loginModel');
-const bcrypt = require('bcryptjs');
-const salt = bcrypt.genSaltSync(14);
+const userModel = require('../../Model/userModel');
+var bcrypt = require('bcryptjs');
+var salt = bcrypt.genSaltSync(14);
+const mongoose = require('mongoose');
+const shortUUID = require('short-uuid');
+const session = require('express-session');
 
-
-// Create User
-route.post('/user', (req,res) => {
-    loginModel.create(req.body)
-    .then((user) => {
-        
-        if (!user) {
-            return res.status(400).send('There was an error.');
+// Register User
+route.post('/register', (req,res) => {
+    const {name, password} = req.body;
+    const hash = bcrypt.hashSync(password, salt)
+    const id = shortUUID.generate();
+    const loginItem = {
+        name: name,
+        password: hash,
+        id: id
+    }
+    const userItem = {
+        id: id,
+        data: {
+            name: name,
+            teams: {
+                past: [],
+                current: ''
+            },
+            bugs: [],
         }
-        return res.status(201).send('Created User')
+    }
+
+    loginModel.findOne({name})
+    .then((found) => {
+        if (found) {
+            return res.status(400).send('There was an error, no dup.')
+        }
+
+        loginModel.create(loginItem)
+        .then((login) => {
+
+            userModel.create(userItem)
+            .then((user) => {
+                if (user) {
+
+                return res.status(201).send({
+                    status:'success'
+                })}
+            })
+            .catch((err) => {
+                return  res.status(400).send('There was an error.')
+            })
+
+        })
+        .catch(err => res.status(400).send(err));
     })
-    .catch(err => res.status(400).send(err));
+
+    
 })
 
 
@@ -45,16 +85,6 @@ route
         })
         .catch(err => {
             if (err) res.status(400).send(err)
-        })
-    })
-    .get('/', (req,res) => {
-        loginModel.find()
-        .then((user) => {
-            if (!user) return res.status(400).send('No such user')
-            res.status(200).send(user)
-        })
-        .catch(err => {
-            if(err) res.status(400).send(err)
         })
     })
 
