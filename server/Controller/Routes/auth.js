@@ -60,7 +60,6 @@ route.post('/register', (req,res) => {
 
 // Update User
 // Login User
-// Get User
 route
     .put('/user', (req,res) => {
         const {_id,name,password,role} = req.body;
