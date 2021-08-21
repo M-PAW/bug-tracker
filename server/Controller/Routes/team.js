@@ -18,10 +18,32 @@ route.post('/create', (req,res) => {
 
     teamModel.create(newTeam)
     .then((team) => {
-        res.status(201).send(team);
+        const _id = creatorID;
+        userModel.findById(_id)
+        .then((userData) => {
+            console.log(userData);
+            const data = userData.data;
+            data.teams.current.push(newTeam)
+
+            userModel.findByIdAndUpdate(_id,{data})
+            .then((user) => {
+                res.status(201).send('Team-User Success')
+            })
+            .catch((err) => {
+                return res.status(400).send('Team-User Update Failed')
+            })
+
+
+        })
+        .catch((err) => {
+            return res.status(400).send('There was an error.2')
+        })
+
+
+
     })
     .catch((err) => {
-        res.status(400).send('There was an error.')
+        res.status(400).send('There was an error.1')
     })
 })
 

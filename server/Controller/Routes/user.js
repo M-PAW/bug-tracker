@@ -5,9 +5,9 @@ const loginModel = require('../../Model/loginModel');
 
 // Get User
 route.get('/', (req,res) => {
-    const {id} = req.body;
+    const {_id} = req.body;
 
-    userModel.findOne({id})
+    userModel.findOne({_id})
     .then(userData => {
         if (userData) {
             return res.status(200).send(userData)

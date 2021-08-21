@@ -6,7 +6,7 @@ const schema = mongoose.Schema({
         name:String,
         teams:Object({
             past:Object([]),
-            current:String
+            current:Object([]),
         }),
         bugs:Object([])
     })
