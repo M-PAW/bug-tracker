@@ -11,22 +11,9 @@ const session = require('express-session');
 route.post('/register', (req,res) => {
     const {name, password} = req.body;
     const hash = bcrypt.hashSync(password, salt)
-    const id = shortUUID.generate();
     const loginItem = {
         name: name,
         password: hash,
-        id: id
-    }
-    const userItem = {
-        id: id,
-        data: {
-            name: name,
-            teams: {
-                past: [],
-                current: ''
-            },
-            bugs: [],
-        }
     }
 
     loginModel.findOne({name})
@@ -38,6 +25,18 @@ route.post('/register', (req,res) => {
         loginModel.create(loginItem)
         .then((login) => {
 
+            const userItem = {
+                _id: login._id,
+                data: {
+                    name: name,
+                    teams: {
+                        past: [],
+                        current: ''
+                    },
+                    bugs: [],
+                }
+            }
+
             userModel.create(userItem)
             .then((user) => {
                 if (user) {
@@ -48,6 +47,17 @@ route.post('/register', (req,res) => {
             })
             .catch((err) => {
                 return  res.status(400).send('There was an error.')
+            })
+
+            userModel.findOne(name)
+            .then((userData) => {
+                const data = userData.data;
+                const _id = userData._id;
+
+                if (data.teams.current[0] === "") {
+                    data.teams.current.pop();
+                    userModel.findByIdAndUpdate(_id,{data})
+                }
             })
 
         })

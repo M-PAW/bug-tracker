@@ -4,9 +4,8 @@ const schema = mongoose.Schema({
     id:String,
     data:Object({
         team:String,
-        members:Object([
-            
-        ])
+        members:Object([]),
+        queue:Object([])
     })
 })
 
