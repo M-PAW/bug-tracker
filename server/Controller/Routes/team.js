@@ -3,11 +3,19 @@ const teamModel = require('../../Model/teamModel');
 const userModel = require('../../Model/userModel');
 const shortUUID = require('short-uuid');
 
+// Get Team
+route.get('/', (req,res) => {
+    const teamID = req.body.teamID;
+    teamModel.findOne(teamID)
+    .then((team) => {
+        res.status(200).send(team)
+    })
+})
+
 // Create Team
 route.post('/create', (req,res) => {
     const {teamName, creatorName, creatorID} = req.body;
     const newTeam = {
-        id:shortUUID.generate(),
         data: {
             team: teamName,
             members:[
@@ -20,30 +28,21 @@ route.post('/create', (req,res) => {
     .then((team) => {
         const _id = creatorID;
         userModel.findById(_id)
-        .then((userData) => {
-            console.log(userData);
-            const data = userData.data;
-            data.teams.current.push(newTeam)
+        .then((user) => {
 
-            userModel.findByIdAndUpdate(_id,{data})
-            .then((user) => {
-                res.status(201).send('Team-User Success')
+            const data = user.data;
+            data.teams.current.push(team)
+            userModel.findOneAndUpdate(creatorID,{data})
+            .then((updated) => {
+                res.status(201).send(updated)
             })
-            .catch((err) => {
-                return res.status(400).send('Team-User Update Failed')
-            })
-
-
+            .catch(err => res.status(400).send('Error 3'))
         })
-        .catch((err) => {
-            return res.status(400).send('There was an error.2')
-        })
-
-
+        .catch(err => res.status(400).send('Error 2'))
 
     })
     .catch((err) => {
-        res.status(400).send('There was an error.1')
+        res.status(400).send('Error 1')
     })
 })
 

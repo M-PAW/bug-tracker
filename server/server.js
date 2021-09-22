@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 mongoose.connect(process.env.DB_URI,{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false},(err) => {
     if (!err) return console.log('DB Connected Successfully');
@@ -19,13 +19,18 @@ app.use(helmet());
 app.use(cors());
 app.use(cookieParser());
 
-app.use('/auth', require('./Controller/Routes/auth'))
+// app.use('/auth', require('./Controller/Routes/auth'))
 app.use('/user', require('./Controller/Routes/user'))
-app.use('/team/', require('./Controller/Routes/team'))
+// app.use('/team/', require('./Controller/Routes/team'))
+
+// Helper Testing
+// const getUser = require('./Helpers/getUser')
 
 app.get('/', (req,res) => {
-    res.status(200).json('Online')
+    console.log(" '/' hit");
+    res.send("Online")
 })
+
 
 
 
