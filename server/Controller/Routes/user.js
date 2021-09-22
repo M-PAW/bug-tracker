@@ -1,45 +1,27 @@
-const route = require('express').Router();
-const userModel = require('../../Model/userModel');
-const loginModel = require('../../Model/loginModel');
+const userRouter = require('express').Router();
 
+// userRouter-Helpers
+const getUser = require('../../Helpers/userHelpers/getUser');
+const updateCredentials = require('../../Helpers/userHelpers/updateCredentials');
+const updateProfile = require('../../Helpers/userHelpers/updateProfile');
 
 // Get User
-route.get('/', (req,res) => {
+userRouter.get('/', (req,res) => {
+    console.log("/user/ hit");
     const {_id} = req.body;
-
-    userModel.findOne({_id})
-    .then(userData => {
-        if (userData) {
-            return res.status(200).send(userData)
-        }
-    })
-    .catch((err) => {
-        return res.status(400).send('Unable to get user')
-    })
+    getUser(_id, res);
 })
 
 // Update User Credentials
-route.put('/', (req,res) => {
+userRouter.put('/', (req,res) => {
     const {name, password} = req.body;
-    loginModel.findOneAndUpdate({name,password})
-    .then((login) => {
-        res.status(201).send('Success');
-    })
-    .catch((err) => {
-        res.status(400).send('Error');
-    })
+    updateCredentials(name,password,res);
 })
 
 // Update User Profile
-route.put('/profile', (req,res) => {
-    const {id, data} = req.body;
-    userModel.findOneAndUpdate({id,data})
-    .then((user) => {
-        res.status(201).send('Success');
-    })
-    .catch((err) => {
-        res.status(400).send('Error')
-    })
+userRouter.put('/profile', (req,res) => {
+    const {_id, data} = req.body;
+    updateProfile(_id,data,res);
 })
 
-module.exports = route;
+module.exports = userRouter;
