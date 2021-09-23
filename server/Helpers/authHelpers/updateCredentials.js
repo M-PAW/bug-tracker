@@ -1,7 +1,7 @@
 const loginModel = require('../../Model/loginModel');
 
-const updateCredentials = (name,password,res) => {
-    loginModel.findByIdAndUpdate({name,password})
+const updateCredentials = (id,name,password,res) => {
+    loginModel.findByIdAndUpdate(id,{name,password})
     .then(updated => {
         return res.status(201).send('Success');
     })
