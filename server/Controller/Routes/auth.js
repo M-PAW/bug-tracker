@@ -1,4 +1,4 @@
-const route = require('express').Router();
+const authRouter = require('express').Router();
 const loginModel = require('../../Model/loginModel');
 const userModel = require('../../Model/userModel');
 var bcrypt = require('bcryptjs');
@@ -7,64 +7,14 @@ const mongoose = require('mongoose');
 const shortUUID = require('short-uuid');
 const session = require('express-session');
 
+// authRouter-Helpers
+const register = require('../../Helpers/authHelpers/register');
+
 // Register User
-route.post('/register', (req,res) => {
+authRouter.post('/register', (req,res) => {
     const {name, password} = req.body;
     const hash = bcrypt.hashSync(password, salt)
-    const loginItem = {
-        name: name,
-        password: hash,
-    }
-
-    loginModel.findOne({name})
-    .then((found) => {
-        if (found) {
-            return res.status(400).send('There was an error, no dup.')
-        }
-
-        loginModel.create(loginItem)
-        .then((login) => {
-
-            const userItem = {
-                _id: login._id,
-                data: {
-                    name: name,
-                    teams: {
-                        past: [],
-                        current: ''
-                    },
-                    bugs: [],
-                }
-            }
-
-            userModel.create(userItem)
-            .then((user) => {
-                if (user) {
-
-                return res.status(201).send({
-                    status:'success'
-                })}
-            })
-            .catch((err) => {
-                return  res.status(400).send('There was an error.')
-            })
-
-            userModel.findOne(name)
-            .then((userData) => {
-                const data = userData.data;
-                const _id = userData._id;
-
-                if (data.teams.current[0] === "") {
-                    data.teams.current.pop();
-                    userModel.findByIdAndUpdate(_id,{data})
-                }
-            })
-
-        })
-        .catch(err => res.status(400).send(err));
-    })
-
-    
+    register(name,hash,res);
 })
 
 
