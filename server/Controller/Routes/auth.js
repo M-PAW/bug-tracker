@@ -9,12 +9,19 @@ const session = require('express-session');
 
 // authRouter-Helpers
 const register = require('../../Helpers/authHelpers/register');
+const updateCredentials = require('../../Helpers/authHelpers/updateCredentials');
 
 // Register User
 authRouter.post('/register', (req,res) => {
     const {name, password} = req.body;
     const hash = bcrypt.hashSync(password, salt)
     register(name,hash,res);
+})
+
+authRouter.put('/update', (req,res) => {
+    const {_id,name, password} = req.body;
+    const hash = bcrypt.hashSync(password,salt)
+    updateCredentials(_id,name,hash,res);
 })
 
 
