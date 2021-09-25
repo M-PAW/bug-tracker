@@ -2,7 +2,6 @@ const userRouter = require('express').Router();
 
 // userRouter-Helpers
 const getUser = require('../../Helpers/userHelpers/getUser');
-const updateCredentials = require('../../Helpers/authHelpers/updateCredentials');
 const updateProfile = require('../../Helpers/userHelpers/updateProfile');
 
 // Get User

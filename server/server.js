@@ -5,6 +5,9 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 
+const userRouter = require('./Controller/Routes/user');
+const authRouter = require('./Controller/Routes/auth');
+
 mongoose.connect(process.env.DB_URI,{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false},(err) => {
     if (!err) return console.log('DB Connected Successfully');
     console.log(err);
@@ -19,20 +22,15 @@ app.use(helmet());
 app.use(cors());
 app.use(cookieParser());
 
-// app.use('/auth', require('./Controller/Routes/auth'))
-app.use('/user', require('./Controller/Routes/user'))
+app.use('/auth', authRouter)
+app.use('/user', userRouter)
 // app.use('/team/', require('./Controller/Routes/team'))
 
-// Helper Testing
-// const getUser = require('./Helpers/getUser')
-
+// Test Enpoint - Remove Later
 app.get('/', (req,res) => {
     console.log(" '/' hit");
     res.send("Online")
 })
-
-
-
 
 app.listen(PORT, () => {
     console.log(`Server Online: ${PORT}`);

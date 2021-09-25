@@ -18,6 +18,29 @@ authRouter.post('/register', (req,res) => {
     register(name,hash,res);
 })
 
+// Login User
+authRouter.post('/login', (req,res) => {
+    const {name,password} = req.body;
+    if (!name | !password) {
+        return res.status(400).send('Error')
+    }
+    loginModel.findOne({name})
+    .then(user => {
+        const auth = bcrypt.compareSync(password, user.password)
+        console.log(auth);
+        if (auth) {
+            return res.status(200).send('Success')
+        }
+        else {
+            return res.status(400).send('Error')
+        }
+    })
+    .catch((err) => {
+        return res.status(400).send('Error')
+    })
+})
+
+// Update User Credentials
 authRouter.put('/update', (req,res) => {
     const {_id,name, password} = req.body;
     const hash = bcrypt.hashSync(password,salt)
@@ -27,19 +50,7 @@ authRouter.put('/update', (req,res) => {
 
 // Update User
 // Login User
-route
-    .put('/user', (req,res) => {
-        const {_id,name,password,role} = req.body;
-        loginModel.findByIdAndUpdate(_id, {name,password,role})
-        .then((user) => {
-            if (!user) return res.status(400).send('No Such User');
-            res.send('Update Success');
-        })
-        .catch(err => {
-            if (err) res.status(400).send(err)
-        })
-
-    })
+authRouter
     .post('/', (req,res) => {
         console.log(req.body)
         loginModel.findOne(req.body)
@@ -54,4 +65,4 @@ route
         })
     })
 
-module.exports = route;
+module.exports = authRouter;
