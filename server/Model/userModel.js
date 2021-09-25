@@ -2,13 +2,17 @@ const mongoose = require('mongoose');
 
 const schema = mongoose.Schema({
     id:String,
+    role:Number,
     data:Object({
         name:String,
         teams:Object({
+            current:String,
             past:Object([]),
-            current:Object([]),
         }),
-        bugs:Object([])
+        bugs:Object({
+            current:String,
+            past:Object([])
+        })
     })
 })
 
