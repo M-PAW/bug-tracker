@@ -12,7 +12,7 @@ const createSession = ({_id,name},res) => {
     sessionModel.create(sessionObject)
     .then(newSession => {
         if (newSession) {
-            return res.status(201).send(newSession._id)
+            return res.status(201).send({authToken:newSession._id})
         }
     })
     .catch((err) => {
