@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 
 const schema = mongoose.Schema({
-    String:String
+    _id:String,
+    userId:String,
+    created:Date
 })
 
 const model = mongoose.model('Session',schema)

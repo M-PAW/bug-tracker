@@ -9,6 +9,7 @@ const session = require('express-session');
 const register = require('../../Helpers/authHelpers/register');
 const updateCredentials = require('../../Helpers/authHelpers/updateCredentials');
 const login = require('../../Helpers/authHelpers/login');
+const logout = require('../../Helpers/authHelpers/logout');
 
 // Register User
 authRouter.post('/register', (req,res) => {
@@ -26,6 +27,11 @@ authRouter.post('/login', (req,res) => {
     else {
         login(name,password,bcrypt,res)
     }
+})
+
+authRouter.post('/logout', (req,res) => {
+    //Pass Session-Id Later, Then adjust logout helper for sessions
+    logout(res)
 })
 
 // Update Credentials
