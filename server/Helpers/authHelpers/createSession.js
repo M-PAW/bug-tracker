@@ -3,13 +3,12 @@ const sessionModel = require('../../Model/sessionModel');const signToken = requi
 const createSession = ({_id,name},res) => {
     const token = signToken(name);
     const id = _id;
-    const time = new Date.now()
+    const time = Date.now()
     const sessionObject = {
         _id: token,
         userId: id,
         created: time
     }
-    console.log('Hit Pre DB');
     sessionModel.create(sessionObject)
     .then(newSession => {
         if (newSession) {
@@ -17,7 +16,7 @@ const createSession = ({_id,name},res) => {
         }
     })
     .catch((err) => {
-        return res.status(400).send('Error3')
+        return res.status(400).send('Error')
     })
 }
 
