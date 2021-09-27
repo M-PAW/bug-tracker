@@ -30,8 +30,14 @@ authRouter.post('/login', (req,res) => {
 })
 
 authRouter.post('/logout', (req,res) => {
-    //Pass Session-Id Later, Then adjust logout helper for sessions
-    logout(res)
+    const authToken = req.body.authToken;
+    console.log(typeof(authToken));
+    if (!authToken){
+        return res.status(400).send('Error')
+    }
+    else {
+        logout(authToken,res)
+    }
 })
 
 // Update Credentials
