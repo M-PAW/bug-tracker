@@ -9,7 +9,7 @@ const createUser = (loginObject,res) => {
             _id: login._id,
             role: 0,
             data: {
-                name: login.name,
+                username: '',
                 teams: {
                     current:'',
                     past:[],

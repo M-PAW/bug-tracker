@@ -1,7 +1,7 @@
 const loginModel = require('../../Model/loginModel');
 const sessionModel = require('../../Model/sessionModel');
 
-const updateCredentials = (authToken,name,oldPassword,newPassword,bcrypt,salt, res) => {
+const updateCredentials = (authToken,oldPassword,newPassword,bcrypt,salt, res) => {
 
     sessionModel.findOne({_id:authToken}, (err, session) => {
         if (err | !session) {
@@ -18,7 +18,7 @@ const updateCredentials = (authToken,name,oldPassword,newPassword,bcrypt,salt, r
         
                     const password = bcrypt.hashSync(newPassword,salt)
                     const _id = foundUser._id;
-                    loginModel.findByIdAndUpdate(_id,{ name,password})
+                    loginModel.findByIdAndUpdate(_id,{password})
                     .then(updated => {
                         return res.status(201).send('Success')
                     })

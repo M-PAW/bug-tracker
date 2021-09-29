@@ -4,7 +4,7 @@ const schema = mongoose.Schema({
     id:String,
     role:Number,
     data:Object({
-        name:String,
+        username:String,
         teams:Object({
             current:String,
             past:Object([]),
