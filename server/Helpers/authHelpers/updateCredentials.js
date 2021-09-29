@@ -1,13 +1,29 @@
 const loginModel = require('../../Model/loginModel');
+const sessionModel = require('../../Model/sessionModel');
 
-const updateCredentials = (id,name,password,res) => {
-    loginModel.findByIdAndUpdate(id,{name,password})
-    .then(updated => {
-        return res.status(201).send('Success');
-    })
-    .catch((err) => {
-        return res.status(400).send('Error')
-    })
+const updateCredentials = (authToken,name,oldPassword,newPassword,bcrypt,salt, res) => {
+
+    sessionModel.findOne({_id:authToken}, (err, session) => {
+        if (err | !session) {
+            return res.status(400).send('Error1')
+        }
+        if (session) {
+            loginModel.findOne({_id:session.userId}, (err, user) => {
+                if (err | !user) {
+                    return res.status(400).send('Error2')
+                }
+                if (user) {
+                    console.log(oldPassword);
+                    console.log(user);
+                    if (bcrypt.compareSync(user.password, oldPassword)){
+                        const newHash = bcrypt.hashSync(newPassword,salt)
+                        console.log(newHash);
+                    }
+                }
+            })
+        }
+    })    
+
 }
 
 module.exports = updateCredentials;

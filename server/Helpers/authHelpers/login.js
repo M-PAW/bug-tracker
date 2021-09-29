@@ -6,7 +6,8 @@ const login = (name,password,bcrypt,res) => {
     loginModel.findOne({name})
     .then(foundUser => {
         const userId = foundUser._id;
-        if (foundUser) {
+        const isValid = bcrypt.compareSync(password,foundUser.password);
+        if (isValid) {
             sessionModel.findOne({userId}, (err, foundSession) => {
                 if (foundSession) {
                     return res.status(200).send({authToken: foundSession._id})
@@ -17,11 +18,11 @@ const login = (name,password,bcrypt,res) => {
             })
         }
         else {
-            return res.status(400).send('Error')
+            return res.status(400).send('Error1')
         }
     })
     .catch((err) => {
-        return res.status(400).send('Error')
+        return res.status(400).send('Error2')
     })
 }
 

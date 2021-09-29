@@ -29,9 +29,9 @@ authRouter.post('/login', (req,res) => {
     }
 })
 
+// Logout
 authRouter.post('/logout', (req,res) => {
     const authToken = req.body.authToken;
-    console.log(typeof(authToken));
     if (!authToken){
         return res.status(400).send('Error')
     }
@@ -42,9 +42,8 @@ authRouter.post('/logout', (req,res) => {
 
 // Update Credentials
 authRouter.put('/update', (req,res) => {
-    const {_id,name, password} = req.body;
-    const hash = bcrypt.hashSync(password,salt)
-    updateCredentials(_id,name,hash,res);
+    const {authToken,name, oldPassword, newPassword, hash} = req.body;
+    updateCredentials(authToken,name,oldPassword,newPassword,bcrypt, salt,res);
 })
 
 module.exports = authRouter;
