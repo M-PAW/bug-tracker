@@ -5,20 +5,27 @@ const updateCredentials = (authToken,name,oldPassword,newPassword,bcrypt,salt, r
 
     sessionModel.findOne({_id:authToken}, (err, session) => {
         if (err | !session) {
-            return res.status(400).send('Error1')
+            return res.status(400).send('Error')
         }
         if (session) {
-            loginModel.findOne({_id:session.userId}, (err, user) => {
-                if (err | !user) {
-                    return res.status(400).send('Error2')
+            loginModel.findOne({_id:session.userId}, (err, foundUser) => {
+                if (err | !foundUser) {
+                    return res.status(400).send('Error')
                 }
-                if (user) {
-                    console.log(oldPassword);
-                    console.log(user);
-                    if (bcrypt.compareSync(user.password, oldPassword)){
-                        const newHash = bcrypt.hashSync(newPassword,salt)
-                        console.log(newHash);
-                    }
+                const isValid = bcrypt.compareSync(oldPassword, foundUser.password);
+
+                if (isValid) {
+        
+                    const password = bcrypt.hashSync(newPassword,salt)
+                    const _id = foundUser._id;
+                    loginModel.findByIdAndUpdate(_id,{ name,password})
+                    .then(updated => {
+                        return res.status(201).send('Success')
+                    })
+                    .catch((err) => {
+                        return res.status(400).send('Error')
+                    })
+
                 }
             })
         }

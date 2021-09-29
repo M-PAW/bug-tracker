@@ -18,11 +18,11 @@ const login = (name,password,bcrypt,res) => {
             })
         }
         else {
-            return res.status(400).send('Error1')
+            return res.status(400).send('Error')
         }
     })
     .catch((err) => {
-        return res.status(400).send('Error2')
+        return res.status(400).send('Error')
     })
 }
 
