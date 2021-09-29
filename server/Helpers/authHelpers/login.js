@@ -2,8 +2,8 @@ const loginModel = require('../../Model/loginModel');
 const sessionModel = require('../../Model/sessionModel');
 const createSession = require('./createSession');
 
-const login = (name,password,bcrypt,res) => {
-    loginModel.findOne({name})
+const login = (email,password,bcrypt,res) => {
+    loginModel.findOne({email})
     .then(foundUser => {
         const userId = foundUser._id;
         const isValid = bcrypt.compareSync(password,foundUser.password);
@@ -13,7 +13,7 @@ const login = (name,password,bcrypt,res) => {
                     return res.status(200).send({authToken: foundSession._id})
                 }
                 if (!foundSession) {
-                    createSession(foundUser,res)
+                    createSession(foundUser,email,res)
                 }
             })
         }

@@ -1,8 +1,8 @@
 const sessionModel = require('../../Model/sessionModel');
 const signToken = require('./signToken');
 
-const createSession = ({_id,name},res) => {
-    const token = signToken(name);
+const createSession = ({_id},email,res) => {
+    const token = signToken(email);
     const id = _id;
     const time = Date.now()
     const sessionObject = {

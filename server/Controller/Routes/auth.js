@@ -13,19 +13,19 @@ const logout = require('../../Helpers/authHelpers/logout');
 
 // Register User
 authRouter.post('/register', (req,res) => {
-    const {name, password} = req.body;
+    const {email, password} = req.body;
     const hash = bcrypt.hashSync(password, salt)
-    register(name,hash,res);
+    register(email,hash,res);
 })
 
 // Login User
 authRouter.post('/login', (req,res) => {
-    const {name,password} = req.body;
-    if (!name | !password) {
+    const {email,password} = req.body;
+    if (!email | !password) {
         return res.status(400).send('Error')
     }
     else {
-        login(name,password,bcrypt,res)
+        login(email,password,bcrypt,res)
     }
 })
 
@@ -40,10 +40,10 @@ authRouter.post('/logout', (req,res) => {
     }
 })
 
-// Update Credentials
+// Update Password
 authRouter.put('/update', (req,res) => {
-    const {authToken,name, oldPassword, newPassword, hash} = req.body;
-    updateCredentials(authToken,name,oldPassword,newPassword,bcrypt, salt,res);
+    const {authToken,oldPassword,newPassword} = req.body;
+    updateCredentials(authToken,oldPassword,newPassword,bcrypt, salt,res);
 })
 
 module.exports = authRouter;

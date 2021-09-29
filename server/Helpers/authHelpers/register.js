@@ -4,12 +4,12 @@ const userModel = require('../../Model/userModel');
 // Secondary Helpers
 const createUser = require('./createUser');
 
-const register = (name,hash,res) => {
+const register = (email,hash,res) => {
     const loginObject = {
-        name:name,
-        password: hash,
+        email:email,
+        password:hash,
     }
-    loginModel.findOne({name})
+    loginModel.findOne({email})
     .then(found => {
         if (!found) {
             createUser(loginObject,res)
