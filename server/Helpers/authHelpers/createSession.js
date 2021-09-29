@@ -1,4 +1,5 @@
-const sessionModel = require('../../Model/sessionModel');const signToken = require('./signToken');
+const sessionModel = require('../../Model/sessionModel');
+const signToken = require('./signToken');
 
 const createSession = ({_id,name},res) => {
     const token = signToken(name);
