@@ -43,7 +43,12 @@ authRouter.post('/logout', (req,res) => {
 // Update Password
 authRouter.put('/update', (req,res) => {
     const {authToken,oldPassword,newPassword} = req.body;
-    updateCredentials(authToken,oldPassword,newPassword,bcrypt, salt,res);
+    if (!authToken | !oldPassword | !newPassword) {
+        return res.status(400).send('Error')
+    }
+    else {
+        updateCredentials(authToken,oldPassword,newPassword,bcrypt, salt,res);
+    }
 })
 
 module.exports = authRouter;
