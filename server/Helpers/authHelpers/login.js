@@ -10,7 +10,7 @@ const login = (email,password,bcrypt,res) => {
         if (isValid) {
             sessionModel.findOne({userId}, (err, foundSession) => {
                 if (foundSession) {
-                    return res.status(200).send({authToken: foundSession._id})
+                    return res.status(200).send({authToken: foundSession._id, userId:userId})
                 }
                 if (!foundSession) {
                     createSession(foundUser,email,res)
