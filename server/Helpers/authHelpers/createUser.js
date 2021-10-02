@@ -7,7 +7,7 @@ const createUser = (loginObject,res) => {
     .then(login => {
         const userObject = {
             _id: login._id,
-            role: 0,
+            role: 1,
             data: {
                 username: '',
                 teams: {
