@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 
 const userRouter = require('./Controller/Routes/user');
 const authRouter = require('./Controller/Routes/auth');
+const teamRouter = require('./Controller/Routes/team');
 
 mongoose.connect(process.env.DB_URI,{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false},(err) => {
     if (!err) return console.log('DB Connected Successfully');
@@ -24,7 +25,7 @@ app.use(cookieParser());
 
 app.use('/auth', authRouter)
 app.use('/user', userRouter)
-// app.use('/team/', require('./Controller/Routes/team'))
+app.use('/team', teamRouter)
 
 // Test Enpoint - Remove Later
 app.get('/', (req,res) => {
