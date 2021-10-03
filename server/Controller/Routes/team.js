@@ -6,6 +6,7 @@ const shortUUID = require('short-uuid');
 // Team Helpers
 const getTeam = require('../../Helpers/teamHelpers/getTeam');
 const createTeam = require('../../Helpers/teamHelpers/createTeam');
+const updateTeam = require('../../Helpers/teamHelpers/updateTeam');
 
 // Get Team
 teamRouter.get('/', (req,res) => {
@@ -22,7 +23,7 @@ teamRouter.get('/', (req,res) => {
 teamRouter.post('/create', (req,res) => {
     const {userId, teamData} = req.body;
     if (!userId | !teamData) {
-        res.status(400).send('Error1')
+        res.status(400).send('Error')
     }
     else {
         createTeam(userId,teamData,res);
@@ -31,7 +32,11 @@ teamRouter.post('/create', (req,res) => {
 
 // Update Team
 teamRouter.put('/update', (req,res) => {
-
+    const {userId,teamId,teamData} = req.body;
+    if (!userId | !teamId | !teamData) {
+        res.status(400).send('Error')
+    }
+    updateTeam(userId,teamId,teamId,res)
 })
 
 
