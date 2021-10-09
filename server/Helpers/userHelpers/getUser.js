@@ -1,10 +1,14 @@
 const userModel = require('../../Model/userModel');
-const loginModel = require('../../Model/loginModel');
 
 const getUser = (userId, res) => {
-    userModel.findOne({_id:userId})
+    userModel.findOne({userId})
     .then(userData => {
-        return res.status(200).send(userData)
+        const responseObject = {
+            userId: userData.userId,
+            role: userData.role,
+            data: userData.data
+        }
+        return res.status(200).send(responseObject)
     })
     .catch((err) => {
         return res.status(400).send('Error')
