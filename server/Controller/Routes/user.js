@@ -27,4 +27,10 @@ userRouter.put('/update', (req,res) => {
     }
 })
 
+// Delete User
+userRouter.post('/delete', (req,res) => {
+    const {authToken, userId, password} = req.body;
+    
+})
+
 module.exports = userRouter;
