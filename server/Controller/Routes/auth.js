@@ -13,9 +13,12 @@ const logout = require('../../Helpers/authHelpers/logout');
 
 // Register User
 authRouter.post('/register', (req,res) => {
-    const {email, password} = req.body;
+    const {username,email, password} = req.body;
     const hash = bcrypt.hashSync(password, salt)
-    register(email,hash,res);
+    if (!username | !email | !password) {
+        return res.status(400).send('Error')
+    }
+    register(username,email,hash,res);
 })
 
 // Login User

@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const schema = mongoose.Schema({
     id:String,
+    teamId:String,
     data:Object({
         team:String,
         members:Object([]),

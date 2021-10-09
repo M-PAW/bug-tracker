@@ -1,15 +1,17 @@
 const loginModel = require('../../Model/loginModel');
 const userModel = require('../../Model/userModel');
+const shortUUID = require('short-uuid');
 
-const createUser = (loginObject,res) => {
+const createUser = (loginObject,username,res) => {
 
     loginModel.create(loginObject)
     .then(login => {
         const userObject = {
             _id: login._id,
             role: 1,
+            userId: shortUUID.generate(),
             data: {
-                username: loginObject.email,
+                username: username,
                 teams: {
                     current:'',
                     past:[],
