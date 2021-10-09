@@ -13,9 +13,10 @@ const updateCredentials = (authToken,oldPassword,newPassword,bcrypt,salt, res) =
                     return res.status(400).send('Error')
                 }
                 const isValid = bcrypt.compareSync(oldPassword, foundUser.password);
-
+                if (!isValid) {
+                    return res.status(401).send('Unauthorized');
+                }
                 if (isValid) {
-        
                     const password = bcrypt.hashSync(newPassword,salt)
                     const _id = foundUser._id;
                     loginModel.findByIdAndUpdate(_id,{password})
