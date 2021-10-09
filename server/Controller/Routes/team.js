@@ -7,15 +7,17 @@ const shortUUID = require('short-uuid');
 const getTeam = require('../../Helpers/teamHelpers/getTeam');
 const createTeam = require('../../Helpers/teamHelpers/createTeam');
 const updateTeam = require('../../Helpers/teamHelpers/updateTeam');
+const addBugToQueue = require('../../Helpers/teamHelpers/addBugToQueue');
+const assignBug = require('../../Helpers/teamHelpers/assignBug');
 
 // Get Team
 teamRouter.get('/', (req,res) => {
-    const {teamId} = req.body;
+    const {userId,teamId} = req.body;
     if (!teamId) {
-        res.status(400).send('Error')
+        res.status(400).send('Error');
     }
     else {
-        getTeam(teamId,res)
+        getTeam(userId,teamId,res)
     }
 })
 
@@ -23,7 +25,7 @@ teamRouter.get('/', (req,res) => {
 teamRouter.post('/create', (req,res) => {
     const {userId, teamData} = req.body;
     if (!userId | !teamData) {
-        res.status(400).send('Error')
+        res.status(400).send('Error');
     }
     else {
         createTeam(userId,teamData,res);
@@ -34,10 +36,27 @@ teamRouter.post('/create', (req,res) => {
 teamRouter.put('/update', (req,res) => {
     const {userId,teamId,teamData} = req.body;
     if (!userId | !teamId | !teamData) {
-        res.status(400).send('Error')
+        res.status(400).send('Error');
     }
     updateTeam(userId,teamId,teamId,res)
 })
 
+// Add bug to Queue
+teamRouter.post('/add', (req,res) => {
+    const {bug, teamId, userId} = req.body;
+    if (!bug | !teamId | !userId) {
+        res.status(400).send('Error');
+    }
+    addBugToQueue(bug,teamId,userId,res)
+})
+
+// Assign bug to User, Remove bug from Queue
+teamRouter.post('/assign', (req,res) => {
+    const {teamId,userId,bugId} = req.body;
+    if (!teamId | !userId){
+        res.status(400).send('Error')
+    }
+    assignBug(teamId,userId,bugId);
+})
 
 module.exports = teamRouter;

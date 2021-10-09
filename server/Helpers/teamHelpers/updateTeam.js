@@ -11,7 +11,25 @@ const updateTeam = (userId,teamId,teamData,res) => {
                 return res.status(401).send('Unauthorized');
             }
             else {
-                teamModel.findByIdAndUpdate
+                teamModel.findById({teamId}, (err, foundTeam) => {
+                    if (err | !foundTeam) {
+                        return res.status(400).send('Error')
+                    }
+                    else {
+                        foundTeam.data.members.forEach(member => {
+                            if (member[1] === userId) {
+                                teamModel.findByIdAndUpdate(teamId,{data:teamData})
+                                .then(success => {
+                                    return res.status(201).send('Success');
+                                })
+                                .catch((err) => {
+                                    return res.status(400).send('Error');
+                                })
+                            }
+                        })
+                    }
+                })
+                return res.status(401).send('Unauthorized');
             }
         }
     })
