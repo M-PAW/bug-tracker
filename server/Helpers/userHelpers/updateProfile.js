@@ -11,7 +11,7 @@ const updateProfile = (authToken,userId,data,res) => {
                 if (err | !foundUser) {
                     return res.status(400).send('Error');
                 }
-                if (foundUser.userId === userId) {
+                if (session.userId == foundUser._id) {
                     const _id = foundUser._id;
                     userModel.findByIdAndUpdate(_id,{data})
                     .then(updated => {
