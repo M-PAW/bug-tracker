@@ -5,13 +5,22 @@ const getTeam = (userId,teamId,res) => {
         if (err | !foundTeam) {
             return res.status(400).send('Error');
         }
-        foundTeam.data.members.forEach(member => {
-            if ( member[1] === userId) {
+        if (foundTeam) {
+            let isValid = false;
+            foundTeam.data.members.forEach(member => {
+                if ( member[1] === userId) {
+                    isValid = true;
+                    return;
+                }
+            })
+            if (isValid) {
                 return res.status(200).send(foundTeam);
             }
-        })
+            else {
+                return res.status(401).send('Unauthorized');
+            }
+        }
     })
-    return res.status(401).send('Unauthorized');
 }
 
 module.exports = getTeam;
