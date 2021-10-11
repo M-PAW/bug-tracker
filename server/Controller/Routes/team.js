@@ -23,12 +23,12 @@ teamRouter.get('/', (req,res) => {
 
 // Create Team
 teamRouter.post('/create', (req,res) => {
-    const {userId, teamData} = req.body;
-    if (!userId | !teamData) {
+    const {userId, teamName} = req.body;
+    if (!userId | !teamName) {
         res.status(400).send('Error');
     }
     else {
-        createTeam(userId,teamData,res);
+        createTeam(userId,teamName,res);
     }
 })
 

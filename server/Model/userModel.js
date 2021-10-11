@@ -11,7 +11,7 @@ const schema = mongoose.Schema({
             past:Object([]),
         }),
         bugs:Object({
-            current:String,
+            current:Object([]),
             past:Object([])
         })
     })
