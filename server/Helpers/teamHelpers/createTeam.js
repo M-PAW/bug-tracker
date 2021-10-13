@@ -18,7 +18,7 @@ const createTeam = (userId,teamName,res) => {
         }
         if (user.data.teams.past.length > 0){
             user.data.teams.past.forEach(team => {
-                if (team.team === teamName) {
+                if (team[0] === teamName) {
                     return res.status(400).send('Unavailable');
                 }
             });
@@ -32,6 +32,7 @@ const createTeam = (userId,teamName,res) => {
             }
             const teamObject = {
                 teamId: teamId,
+                status: "active",
                 data: {
                     team: teamName,
                     members: [[userName,userId]],

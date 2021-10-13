@@ -7,6 +7,7 @@ const shortUUID = require('short-uuid');
 const getTeam = require('../../Helpers/teamHelpers/getTeam');
 const createTeam = require('../../Helpers/teamHelpers/createTeam');
 const updateTeam = require('../../Helpers/teamHelpers/updateTeam');
+const retireTeam = require('../../Helpers/teamHelpers/retireTeam');
 const addBugToQueue = require('../../Helpers/teamHelpers/addBugToQueue');
 const assignBug = require('../../Helpers/teamHelpers/assignBug');
 
@@ -39,6 +40,15 @@ teamRouter.put('/update', (req,res) => {
         res.status(400).send('Error');
     }
     updateTeam(userId,teamId,teamId,res)
+})
+
+// Retire Team
+teamRouter.put('/retire', (req,res) => {
+    const {userId,teamId} = req.body;
+    if (!userId | !teamId) {
+        res.status(400).send('Error');
+    }
+    retireTeam(userId,teamId,res);
 })
 
 // Add bug to Queue
