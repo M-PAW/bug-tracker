@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema({
     id:String,
     teamId:String,
+    status:String,
     data:Object({
         team:String,
         members:Object([]),
