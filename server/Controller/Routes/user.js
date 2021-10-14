@@ -7,7 +7,6 @@ const updateProfile = require('../../Helpers/userHelpers/updateProfile');
 
 // Get User
 userRouter.get('/', (req,res) => {
-    console.log("/user/ Hit");
     const {userId} = req.body;
     if (!userId) {
         res.status(400).send('Error');
