@@ -17,7 +17,6 @@ const retireTeam = (userId,teamId,res) => {
                 else{
                     team.data.members.forEach(member => {
                         if (member[1] === userId) {
-                            userData = user.data;
                             return;
                         }
                         else {
@@ -38,10 +37,8 @@ const retireTeam = (userId,teamId,res) => {
                                     else {
                                         userData = user.data;
                                         let tempStorage = userData.teams.current;
-                                        console.log(tempStorage);
                                         userData.teams.current = [];
                                         userData.teams.past.push(tempStorage);
-                                        console.log(userData);
                                         userModel.findOneAndUpdate(userId,{data:userData}, (err, updateSuccess) => {
                                             if (err | !updateSuccess) {
                                                 return  res.status(400).send('Error');
